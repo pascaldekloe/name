@@ -16,50 +16,34 @@ func SnakeCase(s string) string {
 // Upper case abbreviations are preserved. Use strings.ToLower when
 // all lower case is required.
 func Sep(s string, sep rune) string {
-	in := []rune(s)
-	out := make([]rune, 0, len(in)+5)
+	out := make([]rune, 0, len(s)+5)
 
-	wordStart := func() {
-		if len(out) != 0 && out[len(out)-1] != sep {
-			out = append(out, sep)
-		}
-	}
-
-	for i, r := range s {
-		if !unicode.IsLetter(r) {
-			if unicode.IsNumber(r) {
-				out = append(out, r)
-			} else {
-				wordStart()
+	for _, r := range s {
+		switch {
+		case !unicode.IsLetter(r):
+			if !unicode.IsNumber(r) {
+				if i := len(out); i != 0 && out[i-1] != sep {
+					out = append(out, sep)
+				}
+				continue
 			}
-			continue
-		}
-		// letter
 
-		if !unicode.IsUpper(r) {
-			out = append(out, r)
-			continue
-		}
-		// upper case
+		case !unicode.IsUpper(r):
+			if i := len(out) - 1; i >= 0 {
+				if last := out[i]; unicode.IsUpper(last) {
+					out = out[:i]
+					if i > 0 && out[i-1] != sep {
+						out = append(out, sep)
+					}
+					out = append(out, unicode.ToLower(last))
+				}
+			}
 
-		if i+1 == len(in) {
-			if i > 0 && !unicode.IsUpper(in[i-1]) && unicode.IsLetter(in[i-1]) {
+		default: // upper case letter
+			if last := len(out) - 1; last >= 0 && unicode.IsLower(out[last]) {
 				out = append(out, sep)
 			}
-			out = append(out, r)
-			break
-		}
-		// not last
 
-		if !unicode.IsUpper(in[i+1]) && unicode.IsLetter(in[i+1]) {
-			wordStart()
-			out = append(out, unicode.ToLower(r))
-			continue
-		}
-		// followed by another upper
-
-		if i > 0 && !unicode.IsUpper(in[i-1]) && unicode.IsLetter(in[i-1]) {
-			wordStart()
 		}
 		out = append(out, r)
 	}
@@ -69,8 +53,8 @@ func Sep(s string, sep rune) string {
 	}
 
 	// trim tailing separator
-	if out[len(out)-1] == sep {
-		out = out[:len(out)-1]
+	if i := len(out) - 1; out[i] == sep {
+		out = out[:i]
 	}
 
 	return string(out)
