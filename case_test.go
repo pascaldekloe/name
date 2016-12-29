@@ -4,22 +4,24 @@ import "testing"
 
 var goldenCamelSnakes = map[string]string{
 	"name": "name",
+	"Label": "label",
 	"ID":   "ID",
 
 	"loFi": "lo_fi",
 	"HiFi": "hi_fi",
 
-	"rawHTTPBody": "raw_HTTP_body",
+	// inner abbreviation
+	"rawURLQuery": "raw_URL_query",
 
-	// single outer
+	// single outer abbreviation
 	"vitaminC": "vitamin_C",
 	"TCell":    "T_cell",
 
-	// double outer
+	// double outer abbreviation
 	"masterDB": "master_DB",
 	"IOBounds": "IO_bounds",
 
-	// tripple outer
+	// tripple outer abbreviation
 	"mainAPI": "main_API",
 	"TCPConn": "TCP_conn",
 

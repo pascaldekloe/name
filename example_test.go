@@ -6,13 +6,14 @@ import (
 )
 
 func ExampleSnakeCase() {
-	fmt.Print(name.SnakeCase("CamelToSnake"))
-	fmt.Print(", ", name.SnakeCase("snake_to_snake"))
-	fmt.Print(": ", name.SnakeCase("Anything goes!"))
-	// Output: camel_to_snake, snake_to_snake: anything_goes
+	fmt.Println(name.SnakeCase("CamelToSnake, snake_to_snake: Anything goes!"))
+	// Output: camel_to_snake_snake_to_snake_anything_goes
 }
 
 func ExampleSep() {
-	fmt.Print(name.Sep("*All Hype is aGoodThing (TM)", '-'))
-	// Output: all-hype-is-a-good-thing-TM
+	fmt.Println(name.Sep("*All Hype is aGoodThing (TM)", '-'))
+	fmt.Println(name.Sep("WebCrawler#socketTimeout", '.'))
+	// Output:
+	// all-hype-is-a-good-thing-TM
+	// web.crawler.socket.timeout
 }
