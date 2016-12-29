@@ -1,4 +1,4 @@
-// Package name implements naming conventions like cammel case and snake case.
+// Package name implements naming conventions like camel case and snake case.
 package name
 
 import "unicode"
