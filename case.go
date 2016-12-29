@@ -20,15 +20,12 @@ func Delimit(s string, sep rune) string {
 
 	for _, r := range s {
 		switch {
-		case !unicode.IsLetter(r):
-			if !unicode.IsNumber(r) {
-				if i := len(out); i != 0 && out[i-1] != sep {
-					out = append(out, sep)
-				}
-				continue
+		case unicode.IsUpper(r):
+			if last := len(out) - 1; last >= 0 && unicode.IsLower(out[last]) {
+				out = append(out, sep)
 			}
 
-		case !unicode.IsUpper(r):
+		case unicode.IsLetter(r):
 			if i := len(out) - 1; i >= 0 {
 				if last := out[i]; unicode.IsUpper(last) {
 					out = out[:i]
@@ -39,10 +36,11 @@ func Delimit(s string, sep rune) string {
 				}
 			}
 
-		default: // upper case letter
-			if last := len(out) - 1; last >= 0 && unicode.IsLower(out[last]) {
+		case !unicode.IsNumber(r):
+			if i := len(out); i != 0 && out[i-1] != sep {
 				out = append(out, sep)
 			}
+			continue
 
 		}
 		out = append(out, r)

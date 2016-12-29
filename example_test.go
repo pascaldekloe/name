@@ -11,8 +11,8 @@ func ExampleSnakeCase() {
 }
 
 func ExampleDelimit() {
-	fmt.Println(name.Sep("*All Hype is aGoodThing (TM)", '-'))
-	fmt.Println(name.Sep("WebCrawler#socketTimeout", '.'))
+	fmt.Println(name.Delimit("*All Hype is aGoodThing (TM)", '-'))
+	fmt.Println(name.Delimit("WebCrawler#socketTimeout", '.'))
 	// Output:
 	// all-hype-is-a-good-thing-TM
 	// web.crawler.socket.timeout
