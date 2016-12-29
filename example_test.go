@@ -10,7 +10,7 @@ func ExampleSnakeCase() {
 	// Output: camel_to_snake_snake_to_snake_anything_goes
 }
 
-func ExampleSep() {
+func ExampleDelimit() {
 	fmt.Println(name.Sep("*All Hype is aGoodThing (TM)", '-'))
 	fmt.Println(name.Sep("WebCrawler#socketTimeout", '.'))
 	// Output:

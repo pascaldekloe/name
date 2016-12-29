@@ -5,17 +5,17 @@ import "unicode"
 
 // SnakeCase returns the snake case version of word sequence s.
 // The input can be camel case or just a bunch of words.
-// Upper case abbreviations are preserved. Use strings.ToLower when
-// all lower case is required.
+// Upper case abbreviations are preserved. Use strings.ToLower and
+// strings.ToUpper to enforce a letter case.
 func SnakeCase(s string) string {
-	return Sep(s, '_')
+	return Delimit(s, '_')
 }
 
-// Sep returns a token separated version of word sequence s.
+// Delimit returns word sequence s delimited with sep.
 // The input can be camel case or just a bunch of words.
-// Upper case abbreviations are preserved. Use strings.ToLower when
-// all lower case is required.
-func Sep(s string, sep rune) string {
+// Upper case abbreviations are preserved. Use strings.ToLower and
+// strings.ToUpper to enforce a letter case.
+func Delimit(s string, sep rune) string {
 	out := make([]rune, 0, len(s)+5)
 
 	for _, r := range s {
