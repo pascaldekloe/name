@@ -1,11 +1,15 @@
 package name
 
-import "testing"
+import (
+	"strings"
+	"testing"
+)
 
 var goldenCamelSnakes = map[string]string{
-	"name": "name",
+	"": "",
+	"name":  "name",
 	"Label": "label",
-	"ID":   "ID",
+	"ID":    "ID",
 
 	"loFi": "lo_fi",
 	"HiFi": "hi_fi",
@@ -38,7 +42,7 @@ var goldenCamelSnakes = map[string]string{
 func TestCamelToSnake(t *testing.T) {
 	for camel, snake := range goldenCamelSnakes {
 		if got := SnakeCase(camel); got != snake {
-			t.Errorf("ToSnake(%q) = %q, want %q", camel, got, snake)
+			t.Errorf("snake case %q got %q, want %q", camel, got, snake)
 		}
 	}
 }
@@ -46,7 +50,17 @@ func TestCamelToSnake(t *testing.T) {
 func TestSnakeToSnake(t *testing.T) {
 	for _, s := range goldenCamelSnakes {
 		if got := SnakeCase(s); got != s {
-			t.Errorf("ToSnake(%q) = %q", s, got)
+			t.Errorf("snake case %q got %q", s, got)
+		}
+	}
+}
+
+func TestSnakeToCamel(t *testing.T) {
+	for camel, snake := range goldenCamelSnakes {
+		want := strings.Title(camel)
+		got := strings.Title(CamelCase(snake))
+		if got != want {
+			t.Errorf("camel case %q titled got %q, want %q", snake, got, camel)
 		}
 	}
 }

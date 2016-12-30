@@ -3,8 +3,36 @@ package name
 
 import "unicode"
 
-// SnakeCase returns the snake case version of word sequence s.
-// The input can be camel case or just a bunch of words.
+// CamelCase returns the camel case of word sequence s.
+// The input can be any case or just a bunch of words.
+// Upper case abbreviations are preserved. Use strings.ToLower,
+// strings.ToUpper and strings.Title to enforce a letter case.
+func CamelCase(s string) string {
+	out := make([]rune, 0, len(s)+5)
+	var upper bool
+	for _, r := range s {
+		switch {
+		case unicode.IsLetter(r):
+			if upper {
+				r = unicode.ToUpper(r)
+			}
+
+			fallthrough
+		case unicode.IsNumber(r):
+			upper = false
+			out = append(out, r)
+
+		default:
+			upper = true
+			continue
+
+		}
+	}
+	return string(out)
+}
+
+// SnakeCase returns the snake case of word sequence s.
+// The input can be any case or just a bunch of words.
 // Upper case abbreviations are preserved. Use strings.ToLower and
 // strings.ToUpper to enforce a letter case.
 func SnakeCase(s string) string {
@@ -12,7 +40,7 @@ func SnakeCase(s string) string {
 }
 
 // Delimit returns word sequence s delimited with sep.
-// The input can be camel case or just a bunch of words.
+// The input can be any case or just a bunch of words.
 // Upper case abbreviations are preserved. Use strings.ToLower and
 // strings.ToUpper to enforce a letter case.
 func Delimit(s string, sep rune) string {
