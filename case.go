@@ -55,6 +55,11 @@ func SnakeCase(s string) string {
 	return Delimit(s, '_')
 }
 
+// DotSeparated is an alias for Delimit(s, '.').
+func DotSeparated(s string) string {
+	return Delimit(s, '.')
+}
+
 // Delimit returns word sequence s delimited with sep.
 // The input can be any case or even just a bunch of words.
 // Upper case abbreviations are preserved. Use strings.ToLower
