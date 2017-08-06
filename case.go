@@ -5,8 +5,9 @@ import "unicode"
 
 // CamelCase returns the medial capitals form of word sequence s.
 // The input can be any case or even just a bunch of words.
-// Upper case abbreviations are preserved.
-// Argument upper sets the casing for the first rune.
+// Upper case sequences (abbreviations) are preserved.
+// Argument upper sets the letter case for the first rune. Use true for
+// UpperCamelCase and false for lowerCamelCase.
 func CamelCase(s string, upper bool) string {
 	if s == "" {
 		return ""
@@ -60,10 +61,10 @@ func DotSeparated(s string) string {
 	return Delimit(s, '.')
 }
 
-// Delimit returns word sequence s delimited with sep.
+// Delimit returns word sequence s delimited with separator sep.
 // The input can be any case or even just a bunch of words.
-// Upper case abbreviations are preserved. Use strings.ToLower
-// and strings.ToUpper to enforce a letter case.
+// Upper case sequences (abbreviations) are preserved. Use
+// strings.ToLower and strings.ToUpper to enforce a letter case.
 func Delimit(s string, sep rune) string {
 	out := make([]rune, 0, len(s)+5)
 
