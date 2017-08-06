@@ -4,7 +4,6 @@ Naming convention library for the Go programming language (golang).
 
 This is free and unencumbered software released into the
 [public domain](http://creativecommons.org/publicdomain/zero/1.0).
-package name_test
 
 
 ### Inspiration
