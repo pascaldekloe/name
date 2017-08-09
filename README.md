@@ -1,6 +1,9 @@
 [![GoDoc](https://godoc.org/github.com/pascaldekloe/name?status.svg)](https://godoc.org/github.com/pascaldekloe/name)
 
-Naming convention library for the Go programming language (golang).
+Naming convention library for the Go programming language.
+The functions offer flexible parsing and strict formatting for label
+techniques such as snake_case, Lisp-case, CamelCase and (Java) property keys.
+
 
 This is free and unencumbered software released into the
 [public domain](http://creativecommons.org/publicdomain/zero/1.0).

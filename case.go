@@ -1,4 +1,6 @@
 // Package name implements naming conventions.
+// The functions offer flexible parsing and strict formatting for label
+// techniques such as snake_case, Lisp-case, CamelCase and (Java) property keys.
 package name
 
 import "unicode"
