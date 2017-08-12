@@ -1,4 +1,5 @@
 [![GoDoc](https://godoc.org/github.com/pascaldekloe/name?status.svg)](https://godoc.org/github.com/pascaldekloe/name)
+[![Coverage Status](https://coveralls.io/repos/github/pascaldekloe/name/badge.svg?branch=master)](https://coveralls.io/github/pascaldekloe/name?branch=master)
 
 Naming convention library for the Go programming language.
 The functions offer flexible parsing and strict formatting for label
