@@ -1,5 +1,6 @@
-[![GoDoc](https://godoc.org/github.com/pascaldekloe/name?status.svg)](https://godoc.org/github.com/pascaldekloe/name)
+[![API Documentation](https://godoc.org/github.com/pascaldekloe/name?status.svg)](https://godoc.org/github.com/pascaldekloe/name)
 [![Build Status](https://travis-ci.org/pascaldekloe/name.svg?branch=master)](https://travis-ci.org/pascaldekloe/name)
+[![Build Report](https://cover.run/go/github.com/pascaldekloe/name.svg)](https://cover.run/go/github.com/pascaldekloe/name)
 
 Naming convention library for the Go programming language.
 The functions offer flexible parsing and strict formatting for label
