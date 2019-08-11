@@ -10,22 +10,22 @@ type goldenCase struct {
 
 var goldenCases = []goldenCase{
 	{"", "", ""},
-	{"i", "i", "I"},
+	{"I", "i", "I"},
 	{"name", "name", "Name"},
-	{"ID", "ID", "ID"},
+	{"ID", "iD", "ID"},
 	{"wi_fi", "wiFi", "WiFi"},
 
 	// single outer abbreviation
 	{"vitamin_C", "vitaminC", "VitaminC"},
-	{"T_cell", "TCell", "TCell"},
+	{"T_cell", "tCell", "TCell"},
 
 	// double outer abbreviation
 	{"master_DB", "masterDB", "MasterDB"},
-	{"IO_bounds", "IOBounds", "IOBounds"},
+	{"IO_bounds", "iOBounds", "IOBounds"},
 
 	// tripple outer abbreviation
 	{"main_API", "mainAPI", "MainAPI"},
-	{"TCP_conn", "TCPConn", "TCPConn"},
+	{"TCP_conn", "tCPConn", "TCPConn"},
 
 	// inner abbreviation
 	{"raw_URL_query", "rawURLQuery", "RawURLQuery"},
@@ -33,7 +33,7 @@ var goldenCases = []goldenCase{
 	// numbers
 	{"4x4", "4x4", "4x4"},
 	{"no5", "no5", "No5"},
-	{"DB2", "DB2", "DB2"},
+	{"DB2", "dB2", "DB2"},
 	{"3M", "3M", "3M"},
 	{"7_up", "7Up", "7Up"},
 	{"20th", "20th", "20th"},
