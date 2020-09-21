@@ -1,6 +1,6 @@
-// Package name implements naming conventions.
-// The functions offer flexible parsing and strict formatting for label
-// techniques such as snake_case, Lisp-case, CamelCase and (Java) property keys.
+// Package name implements various naming conventions. The two categories are
+// delimiter-separated and letter case-separated words. Each of the formatting
+// functions support both techniques for input, without any context.
 package name
 
 import (
@@ -8,11 +8,19 @@ import (
 	"unicode"
 )
 
-// CamelCase returns the medial capitals form of word sequence s.
-// The input can be any case or even just a bunch of words.
-// Upper case sequences (abbreviations) are preserved.
-// Argument upper forces the letter case for the first rune. Use
-// true for UpperCamelCase and false for lowerCamelCase.
+// CamelCase returns the medial capitals form of the words in s.
+// Words consist of Unicode letters and/or numbers in any order.
+// Upper case sequences [abbreviations] are preserved.
+//
+// Argument upper forces the letter case for the first rune.
+// Use true for UpperCamelCase, a.k.a. PascalCase.
+// Use false for lowerCamelCase, a.k.a. dromedaryCase.
+//
+// BUG(pascaldekloe): Abbreviations at the beginning of a name
+// may look odd in lowerCamelCase, i.e., "tCPConn".
+//
+// BUG(pascaldekloe): CamelCase concatenates abbreviations by
+// design, i.e., "DB-API" becomes "DBAPI".
 func CamelCase(s string, upper bool) string {
 	var b strings.Builder
 	b.Grow(len(s))
@@ -47,20 +55,20 @@ func CamelCase(s string, upper bool) string {
 	return b.String()
 }
 
-// SnakeCase is an alias for Delimit(s, '_').
+// SnakeCase returns Delimit(s, '_'), a.k.a. the snake_case.
 func SnakeCase(s string) string {
 	return Delimit(s, '_')
 }
 
-// DotSeparated is an alias for Delimit(s, '.').
+// DotSeparated returns Delimit(s, '.'), a.k.a. the dot notation.
 func DotSeparated(s string) string {
 	return Delimit(s, '.')
 }
 
-// Delimit returns word sequence s delimited with separator sep.
-// The input can be any case or even just a bunch of words.
-// Upper case sequences (abbreviations) are preserved. Use
-// strings.ToLower and strings.ToUpper to enforce a letter case.
+// Delimit returns the words in s delimited with separator sep.
+// Words consist of Unicode letters and/or numbers in any order.
+// Upper case sequences [abbreviations] are preserved.
+// Use strings.ToLower or ToUpper to enforce one letter case.
 func Delimit(s string, sep rune) string {
 	var b strings.Builder
 	b.Grow(len(s) + len(s)/4)

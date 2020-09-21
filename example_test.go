@@ -15,10 +15,10 @@ func ExampleCamelCase() {
 }
 
 func ExampleDelimit() {
-	// Garbage to Lisp-case:
+	// Garbage to lisp-case:
 	fmt.Println(name.Delimit("* All Hype is aGoodThing (TM)", '-'))
 
-	// Builds a Java property key:
+	// Extract a Java property key:
 	fmt.Println(name.DotSeparated("WebCrawler#socketTimeout"))
 
 	// Output:
