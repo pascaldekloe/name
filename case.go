@@ -68,48 +68,60 @@ func Delimit(s string, sep rune) string {
 	var b strings.Builder
 	b.Grow(len(s) + len(s)/4)
 
-	var last rune // previous rune; pending write
-	sepDist := 1  // distance between a sep and the current rune r
+	var last rune   // previous rune is a pending write
+	var wordLen int // number of runes in word up until last
 	for _, r := range s {
 		switch {
+		case wordLen == 0:
+			if unicode.IsLetter(r) || unicode.IsNumber(r) {
+				if b.Len() == 0 { // special case
+					last = unicode.ToUpper(r)
+				} else { // delimit previous word
+					b.WriteRune(sep)
+					last = r
+				}
+				wordLen = 1
+			}
+
+			continue
+
 		case unicode.IsUpper(r):
-			if unicode.IsLower(last) {
-				if b.Len() == 0 {
-					last = unicode.ToUpper(last)
-				} else {
-					b.WriteRune(last)
-					last = sep
-					sepDist = 1
+			if !unicode.IsUpper(last) {
+				if b.Len() != 0 {
+					b.WriteRune(last) // end of word
+					last = sep        // enqueue separator instead
+					wordLen = 0       // r is new begin
 				}
 			}
 
 		case unicode.IsLetter(r): // lower-case
 			if unicode.IsUpper(last) {
-				if sepDist > 2 {
+				if wordLen > 1 {
+					// delimit previous word
 					b.WriteRune(sep)
+					wordLen = 1
 				}
 				last = unicode.ToLower(last)
 			}
 
 		case !unicode.IsNumber(r):
-			if last == 0 || last == sep {
-				continue
+			// delimiter found
+			if wordLen != 0 {
+				// flush pending
+				b.WriteRune(last)
+				wordLen = 0
 			}
-			r = sep
-			sepDist = 0
+
+			continue
 		}
 
-		if last != 0 {
-			b.WriteRune(last)
-		}
+		b.WriteRune(last)
 		last = r
-		sepDist++
+		wordLen++
 	}
 
-	if last != 0 && last != sep {
-		if b.Len() == 0 {
-			last = unicode.ToUpper(last)
-		}
+	if wordLen != 0 {
+		// flush pending
 		b.WriteRune(last)
 	}
 
