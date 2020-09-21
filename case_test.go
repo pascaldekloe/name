@@ -1,17 +1,12 @@
 package name
 
-import (
-	"testing"
-)
+import "testing"
 
-type goldenCase struct {
-	snake, lowerCamel, upperCamel string
-}
+var goldenCases = []struct{ snake, lowerCamel, upperCamel string }{
+	{"name", "name", "Name"},
 
-var goldenCases = []goldenCase{
 	{"", "", ""},
 	{"I", "i", "I"},
-	{"name", "name", "Name"},
 	{"ID", "iD", "ID"},
 	{"wi_fi", "wiFi", "WiFi"},
 
@@ -93,10 +88,28 @@ func TestLowerCamelToSnake(t *testing.T) {
 	}
 }
 
+func TestLowerCamelToUpperCamel(t *testing.T) {
+	for _, golden := range goldenCases {
+		camel, want := golden.lowerCamel, golden.upperCamel
+		if got := CamelCase(camel, true); got != want {
+			t.Errorf("%q: got %q, want %q", camel, got, want)
+		}
+	}
+}
+
 func TestUpperCamelToSnake(t *testing.T) {
 	for _, golden := range goldenCases {
 		camel, want := golden.upperCamel, golden.snake
 		if got := SnakeCase(camel); got != want {
+			t.Errorf("%q: got %q, want %q", camel, got, want)
+		}
+	}
+}
+
+func TestUpperCamelToLowerCamel(t *testing.T) {
+	for _, golden := range goldenCases {
+		camel, want := golden.upperCamel, golden.lowerCamel
+		if got := CamelCase(camel, false); got != want {
 			t.Errorf("%q: got %q, want %q", camel, got, want)
 		}
 	}
