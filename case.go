@@ -66,7 +66,7 @@ func DotSeparated(s string) string {
 // Use strings.ToLower or ToUpper to enforce one letter case.
 func Delimit(s string, sep rune) string {
 	var b strings.Builder
-	b.Grow(len(s) + len(s)/4)
+	b.Grow(len(s) + (len(s)+1)/4)
 
 	var last rune   // previous rune is a pending write
 	var wordLen int // number of runes in word up until last

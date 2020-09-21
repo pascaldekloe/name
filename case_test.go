@@ -114,3 +114,20 @@ func TestUpperCamelToLowerCamel(t *testing.T) {
 		}
 	}
 }
+
+func BenchmarkCases(b *testing.B) {
+	for _, sample := range []string{"a2B", "foo-bar", "ProcessHelperFactoryConfig#defaultIDBuilder"} {
+		b.Run(sample, func(b *testing.B) {
+			b.Run("CamelCase", func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					CamelCase(sample, true)
+				}
+			})
+			b.Run("snake_case", func(b *testing.B) {
+				for i := 0; i < b.N; i++ {
+					SnakeCase(sample)
+				}
+			})
+		})
+	}
+}
