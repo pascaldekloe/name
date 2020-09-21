@@ -25,30 +25,25 @@ func CamelCase(s string, upper bool) string {
 	var b strings.Builder
 	b.Grow(len(s))
 
-	for i, r := range s {
-		if i == 0 {
-			if upper {
-				b.WriteRune(unicode.ToUpper(r))
-			} else {
-				b.WriteRune(unicode.ToLower(r))
-			}
-			upper = false
-			continue
-		}
-
+	// The conversion keeps any camel-casing as is.
+	for _, r := range s {
 		switch {
 		case unicode.IsLetter(r):
 			if upper {
 				r = unicode.ToUpper(r)
+			} else if b.Len() == 0 {
+				// force only on beginning of name
+				r = unicode.ToLower(r)
 			}
 
 			fallthrough
 		case unicode.IsNumber(r):
-			upper = false
 			b.WriteRune(r)
+			upper = false // mark continuation
 
 		default:
-			upper = true
+			// delimiter found
+			upper = true // mark begin
 		}
 	}
 
