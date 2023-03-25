@@ -1,5 +1,5 @@
 [![API Documentation](https://godoc.org/github.com/pascaldekloe/name?status.svg)](https://godoc.org/github.com/pascaldekloe/name)
-[![Build Status](https://travis-ci.org/pascaldekloe/name.svg?branch=master)](https://travis-ci.org/pascaldekloe/name)
+[![Build Status](https://github.com/pascaldekloe/name/actions/workflows/go.yml/badge.svg)](https://github.com/pascaldekloe/name/actions/workflows/go.yml)
 
 ## About
 
